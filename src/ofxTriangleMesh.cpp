@@ -94,7 +94,7 @@ void ofxTriangleMesh::triangulate(ofPolyline contour, float angleConstraint, flo
     triangles.clear();
     
     
-    std::map < int , ofPoint  > goodPts;
+    std::map < int , glm::vec3  > goodPts;
     
     for (int i = 0; i < out.numberoftriangles; i++) {
         meshTriangle triangle;
@@ -103,14 +103,14 @@ void ofxTriangleMesh::triangulate(ofPolyline contour, float angleConstraint, flo
         
         for (int j = 0; j < 3; j++){
             whichPt = out.trianglelist[i * 3 + j];
-            triangle.pts[j] = ofPoint(  out.pointlist[ whichPt * 2 + 0],  out.pointlist[ whichPt * 2 + 1]);
+            triangle.pts[j] = glm::vec3(  out.pointlist[ whichPt * 2 + 0],  out.pointlist[ whichPt * 2 + 1], 0);
             triangle.index[j] = whichPt;
             
             
             
         }
         
-        ofPoint tr[3];
+        glm::vec3 tr[3];
         tr[0] = triangle.pts[0];
         tr[1] = triangle.pts[1];
         tr[2] = triangle.pts[2];
@@ -137,7 +137,7 @@ void ofxTriangleMesh::triangulate(ofPolyline contour, float angleConstraint, flo
     
     outputPts.clear();
     std::map < int, int > indexChanges;
-    std::map< int , ofPoint >::iterator iter;
+    std::map< int , glm::vec3 >::iterator iter;
     for (iter = goodPts.begin(); iter != goodPts.end(); ++iter) {
         //cout << iter->first << " " << iter->second << endl;
         indexChanges[iter->first] = outputPts.size();
@@ -186,18 +186,18 @@ void ofxTriangleMesh::clear(){
     nTriangles = 0;
 }
 
-ofPoint ofxTriangleMesh::getTriangleCenter(ofPoint *tr){
+glm::vec3 ofxTriangleMesh::getTriangleCenter(glm::vec3 *tr){
     float c_x = (tr[0].x + tr[1].x + tr[2].x) / 3;
     float c_y = (tr[0].y + tr[1].y + tr[2].y) / 3;
     return ofPoint(c_x, c_y);
 }
 
-bool ofxTriangleMesh::isPointInsidePolygon(ofPoint *polygon,int N, ofPoint p)
+bool ofxTriangleMesh::isPointInsidePolygon(glm::vec3 *polygon,int N, glm::vec3 p)
 {
     int counter = 0;
     int i;
     double xinters;
-    ofPoint p1,p2;
+    glm::vec3 p1,p2;
 
     p1 = polygon[0];
 

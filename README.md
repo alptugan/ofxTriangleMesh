@@ -1,6 +1,8 @@
 ofxTriangleMesh
 ===============
 
+UPDATE FIX for oF 0.10.1
+
 triangle mesh addon for openframeworks
 
 this is based on ofxTriangle, but uses triangle rather than the c++ wrapper triangle++, which allows for more flexability and options in the triangulation. 

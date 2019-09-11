@@ -64,8 +64,8 @@ class ofxTriangleMesh {
 
     
         
-        ofPoint getTriangleCenter(ofPoint *tr);
-        bool isPointInsidePolygon(ofPoint *polygon,int N, ofPoint p);
+        glm::vec3 getTriangleCenter(glm::vec3 *tr);
+        bool isPointInsidePolygon(glm::vec3 *polygon,int N, glm::vec3 p);
 
         void draw();
         void clear();
